@@ -3,3 +3,6 @@ Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll.meta
 Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll.meta
 Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll.meta
 Library/
+UnityVS.Assignment2.CSharp.csproj
+UnityVS.Assignment2.sln
+obj/Debug/UnityVS.Assignment2.CSharp.csproj.FileListAbsolute.txt
