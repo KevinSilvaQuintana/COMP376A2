@@ -3,7 +3,6 @@ using System.Collections;
 
 public class IgnoreCharacterCollision : MonoBehaviour
 {
-
     // Use this for initialization
     void Start() {
         Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Collider2D>();
@@ -11,10 +10,4 @@ public class IgnoreCharacterCollision : MonoBehaviour
 
         Physics2D.IgnoreCollision(rocketCollider, playerCollider);
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

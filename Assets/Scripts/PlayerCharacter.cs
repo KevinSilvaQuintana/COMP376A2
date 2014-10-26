@@ -6,20 +6,25 @@ public class PlayerCharacter : MonoBehaviour
 
     public float jetpackForce;
     public float maxVelocity;
+    public float shootingDelay;
     public GameObject missilePrefab;
+    public float characterOffset;
 
     private bool isFacingLeft = false;
     private Camera mainCam;
+    private float shootingCooldown;
     
 
     void Awake()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //Small fix to allow player to shoot without waiting delay
+        shootingCooldown = shootingDelay;
     }
 
     // Update is called once per frame
     void Update() {
-
+        shootingCooldown += Time.deltaTime;
         RegulateVelocity();
         ManagePlayerInputs();
 	}
@@ -45,8 +50,7 @@ public class PlayerCharacter : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            //ShootMissile();
-            FireMissile();
+            FireMissile();            
         }
     }
 
@@ -70,29 +74,20 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
-    void ShootMissile()
-    {
-        Debug.Log("Shot!");
-        //Get mouse location
-        Vector3 shootingDirection = mainCam.ScreenToWorldPoint(Input.mousePosition - mainCam.WorldToScreenPoint(transform.position));
-        Debug.Log("Shooting direction: " + shootingDirection);
-        float rotationAngle = Vector3.Angle(Vector3.right, shootingDirection);
-
-        //Instantiate missile and assign its forward direction
-        GameObject missile = (GameObject) Instantiate(missilePrefab, transform.position, Quaternion.identity);
-        missile.transform.Rotate(Vector3.right, rotationAngle);
-        //missile.GetComponent<LinearFlight>().forwardDirection = shootingDirection;
-
-    }
-
     void FireMissile()
     {
-        Vector3 pos = Input.mousePosition;
-        pos.z = transform.position.z - Camera.main.transform.position.z;
-        pos = Camera.main.ScreenToWorldPoint(pos);
+        if (shootingCooldown > shootingDelay)
+        {
+            Vector3 pos = Input.mousePosition;
+            pos.z = transform.position.z - Camera.main.transform.position.z;
+            pos = Camera.main.ScreenToWorldPoint(pos);
 
-        Quaternion q = Quaternion.FromToRotation(Vector3.right, pos - transform.position);
-        GameObject newMissile = (GameObject)Instantiate(missilePrefab, transform.position, q);
-        newMissile.rigidbody2D.AddForce(newMissile.transform.right * 500.0f);
+            Quaternion q = Quaternion.FromToRotation(Vector3.right, pos - transform.position);
+            GameObject newMissile = (GameObject)Instantiate(missilePrefab, transform.position, q);
+
+            newMissile.SendMessage("FireWithOffset", characterOffset);
+            shootingCooldown = 0;
+        }
+        
     }
 }
