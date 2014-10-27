@@ -7,7 +7,6 @@ public class WrapAround : MonoBehaviour
 
     Renderer[] renderers;
     private bool isVisible;
-    private Camera mainCamera;
     
     bool isWrappingX = false;
     bool isWrappingY = false;
@@ -16,7 +15,6 @@ public class WrapAround : MonoBehaviour
     void Start()
     {
         renderers = GetComponentsInChildren<Renderer>();
-        mainCamera = Camera.main;
     }
 
     bool CheckRenderers()
@@ -49,7 +47,7 @@ public class WrapAround : MonoBehaviour
         }
 
         Vector3 nextPosition = transform.position;
-        Vector3 viewPortPos = mainCamera.WorldToViewportPoint(nextPosition);
+        Vector3 viewPortPos = Camera.main.WorldToViewportPoint(nextPosition);
 
         if (!isWrappingX && (viewPortPos.x > 1 || viewPortPos.x < 0))
         {

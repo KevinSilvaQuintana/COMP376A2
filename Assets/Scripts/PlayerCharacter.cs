@@ -11,13 +11,11 @@ public class PlayerCharacter : MonoBehaviour
     public float characterOffset;
 
     private bool isFacingLeft = false;
-    private Camera mainCam;
     private float shootingCooldown;
     
 
     void Awake()
     {
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         //Small fix to allow player to shoot without waiting delay
         shootingCooldown = shootingDelay;
     }
@@ -89,5 +87,10 @@ public class PlayerCharacter : MonoBehaviour
             shootingCooldown = 0;
         }
         
+    }
+
+    internal void Kill()
+    {
+        throw new System.NotImplementedException();
     }
 }
