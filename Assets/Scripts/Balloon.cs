@@ -72,7 +72,6 @@ public class Balloon : MonoBehaviour
         Balloon newBalloon = (Balloon)Instantiate(balloonPrefab, transform.position, Quaternion.identity);
         newBalloon.name = "BalloonPrefab";
         newBalloon.transform.localScale *= sizeDecrement;
-        newBalloon.isAlive = true;
         newBalloon.balloonsInCluster = this.balloonsInCluster / 2;
         LinearFlight flight = newBalloon.GetComponent<LinearFlight>();
         flight.IncrementSpeed();
