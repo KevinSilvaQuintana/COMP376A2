@@ -12,12 +12,14 @@ public class Balloon : MonoBehaviour
     //private int balloonsInCluster;
     private Vector3 direction;
     private PlayerCharacter player;
+    private Score score;
 
     // Use this for initialization
     void Start()
     {
         isAlive = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+        score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         Color newColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), 1f);
         gameObject.GetComponentInChildren<SpriteRenderer>().color = newColor;
     }
@@ -48,12 +50,14 @@ public class Balloon : MonoBehaviour
         if (balloonsInCluster == 1)
         {
             Die();
+            score.AddScoreLastBalloon();
         }
         else
         {
             CreateNewBalloon(Random.Range(0f, 180.0f));
             CreateNewBalloon(Random.Range(0f, -180.0f));
             Die();
+            score.AddScoreSplitBalloon();
         }
     }
 
