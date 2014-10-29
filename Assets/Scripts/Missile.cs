@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Missile : MonoBehaviour {
 
-    public float force;
+    [SerializeField]
+    private float force;
 
     void FireWithOffset(float offsetDistance)
     {

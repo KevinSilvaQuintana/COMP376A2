@@ -3,9 +3,11 @@ using System.Collections;
 
 public class LinearFlight : MonoBehaviour
 {
-
+    [SerializeField]
     public float speed;
+    [SerializeField]
     public float speedIncrement;
+    [SerializeField]
     public Vector3 flightDirection;
 
     // Update is called once per frame
@@ -17,6 +19,11 @@ public class LinearFlight : MonoBehaviour
     public void IncrementSpeed()
     {
         speed += speedIncrement;
+    }
+
+    public void AdjustSpeedByMultiplicativeFactor(float factor)
+    {
+        speed *= factor;
     }
 
     public void RotateFlightDirection(float deg)

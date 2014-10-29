@@ -5,7 +5,7 @@ using System.Collections;
 public class WrapAround : MonoBehaviour
 {
 
-    Renderer[] renderers;
+    private Renderer[] renderers;
     private bool isVisible;
     
     bool isWrappingX = false;

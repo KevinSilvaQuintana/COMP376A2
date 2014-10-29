@@ -3,12 +3,16 @@ using System.Collections;
 
 public class PlayerCharacter : MonoBehaviour
 {
-
-    public float jetpackForce;
-    public float maxVelocity;
-    public float shootingDelay;
-    public GameObject missilePrefab;
-    public float characterOffset;
+    [SerializeField]
+    private float jetpackForce;
+    [SerializeField]
+    private float maxVelocity;
+    [SerializeField]
+    private float shootingDelay;
+    [SerializeField]
+    private GameObject missilePrefab;
+    [SerializeField]
+    private float characterOffset;
 
     private bool isFacingLeft = false;
     private float shootingCooldown;

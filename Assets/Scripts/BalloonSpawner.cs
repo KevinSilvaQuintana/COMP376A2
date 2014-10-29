@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public class BalloonSpawner : MonoBehaviour
 {
-
-    public Balloon balloonPrefab;
-    public int numBalloonClusters;
-    public List<Balloon> balloonClusters;
+    [SerializeField]
+    private Balloon balloonPrefab;
+    [SerializeField]
+    private int numBalloonClusters;
+    [SerializeField]
+    private List<Balloon> balloonClusters;
 
     //Calling in awake b/c need to be initialized before other objects. Eg: GameProgress
     void Awake()
