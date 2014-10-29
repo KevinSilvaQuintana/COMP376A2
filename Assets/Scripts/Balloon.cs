@@ -13,6 +13,7 @@ public class Balloon : MonoBehaviour
     private Vector3 direction;
     private PlayerCharacter player;
     private Score score;
+    private GameProgress progress;
 
     // Use this for initialization
     void Start()
@@ -20,6 +21,7 @@ public class Balloon : MonoBehaviour
         isAlive = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
         score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        progress = GameObject.FindGameObjectWithTag("GameProgress").GetComponent<GameProgress>();
         Color newColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), 1f);
         gameObject.GetComponentInChildren<SpriteRenderer>().color = newColor;
     }
@@ -63,6 +65,7 @@ public class Balloon : MonoBehaviour
 
     void Die()
     {
+        progress.DecrementBalloons();
         isAlive = false;
         Destroy(gameObject);
     }

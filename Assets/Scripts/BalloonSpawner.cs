@@ -9,7 +9,8 @@ public class BalloonSpawner : MonoBehaviour
     public int numBalloonClusters;
     public List<Balloon> balloonClusters;
 
-    void Start()
+    //Calling in awake b/c need to be initialized before other objects. Eg: GameProgress
+    void Awake()
     {
         balloonClusters = new List<Balloon>();
         CreateBalloonClusters();
@@ -25,8 +26,10 @@ public class BalloonSpawner : MonoBehaviour
             balloonCluster.name = "BalloonCluster";
             LinearFlight flight = balloonCluster.GetComponent<LinearFlight>();
             flight.RotateFlightDirection(UnityEngine.Random.Range(0f, 360f));
-        }
 
+            balloonClusters.Add(balloonCluster);
+        }
+        Debug.Log(balloonClusters.Count);
     }
 
     public List<Balloon> getBalloonClusters()

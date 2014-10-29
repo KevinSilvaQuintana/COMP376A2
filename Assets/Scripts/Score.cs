@@ -6,7 +6,7 @@ public class Score : MonoBehaviour {
     public int score = 0;
 
     private readonly int SCORE_SPLIT_BALLOON = 1;
-    private readonly int SCORE_LAST_BALLOON = 2;
+    private readonly int SCORE_LAST_BALLOON = 1;
     private readonly int SCORE_HOT_AIR_BALLOON = 10;
     private TextMesh scoreText;
 
