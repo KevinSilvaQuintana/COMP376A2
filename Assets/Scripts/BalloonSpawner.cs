@@ -31,7 +31,6 @@ public class BalloonSpawner : MonoBehaviour
 
             balloonClusters.Add(balloonCluster);
         }
-        Debug.Log(balloonClusters.Count);
     }
 
     public List<Balloon> getBalloonClusters()

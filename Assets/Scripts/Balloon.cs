@@ -34,14 +34,14 @@ public class Balloon : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        GameObject obj = col.gameObject;
-        if (obj.tag == "Missile")
+        GameObject collidingObject = col.gameObject;
+        if (collidingObject.tag == "Missile")
         {
             // Destroy the missile
-            Destroy(obj);
+            Destroy(collidingObject);
             Pop();
         }
-        else if (obj.tag == "Player")
+        else if (collidingObject.tag == "Player")
         {
             player.Kill();
         }
