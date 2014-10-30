@@ -22,7 +22,7 @@ public class BalloonSpawner : MonoBehaviour
     {
         for (int i = 0; i < numBalloonClusters; i++)
         {
-            Vector3 randomPosition = new Vector3(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), 10.0f);
+            Vector3 randomPosition = new Vector3(UnityEngine.Random.Range(0.2f, 0.8f), UnityEngine.Random.Range(0.2f, 0.8f), 10.0f);
             Vector3 worldPos = Camera.main.ViewportToWorldPoint(randomPosition);
             Balloon balloonCluster = (Balloon)Instantiate(balloonPrefab, worldPos, Quaternion.identity);
             balloonCluster.name = "BalloonCluster";

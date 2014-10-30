@@ -8,12 +8,15 @@ public class Balloon : MonoBehaviour
     public float sizeDecrement;
     public bool isAlive;
     public int balloonsInCluster;
+    public float splitCooldown;
 
     //private int balloonsInCluster;
     private Vector3 direction;
     private PlayerCharacter player;
     private Score score;
     private GameProgress progress;
+
+    private float splitTimer = 0f;
 
     // Use this for initialization
     void Start()
@@ -29,7 +32,11 @@ public class Balloon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        splitTimer += Time.deltaTime;
+        if (splitTimer > splitCooldown)
+        {
+            Pop();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -79,5 +86,13 @@ public class Balloon : MonoBehaviour
         LinearFlight flight = newBalloon.GetComponent<LinearFlight>();
         flight.IncrementSpeed();
         flight.RotateFlightDirection(rotationDegrees);
+    }
+
+    public void ReverseDirection()
+    {
+        Vector3 direction = gameObject.GetComponent<LinearFlight>().flightDirection;
+        Debug.Log("before" + direction);
+        gameObject.GetComponent<LinearFlight>().flightDirection = -direction;
+        Debug.Log("after" + direction);
     }
 }
