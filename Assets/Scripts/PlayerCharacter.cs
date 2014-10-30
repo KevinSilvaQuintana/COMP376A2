@@ -16,20 +16,77 @@ public class PlayerCharacter : MonoBehaviour
 
     private bool isFacingLeft = false;
     private float shootingCooldown;
-    
+    public bool isControlsEnabled = true;
+    private Death playerDeath;
+    private Color originalColor;
+    private Color grayscaleColor;
+    private Color currentColor;
 
     void Awake()
     {
         //Small fix to allow player to shoot without waiting delay
         shootingCooldown = shootingDelay;
+        playerDeath = gameObject.GetComponent<Death>();
+        originalColor = gameObject.GetComponentInChildren<SpriteRenderer>().color;
+        Debug.Log(originalColor.ToString());
     }
 
     // Update is called once per frame
     void Update() {
         shootingCooldown += Time.deltaTime;
         RegulateVelocity();
-        ManagePlayerInputs();
+        if (isControlsEnabled)
+        {
+            ManagePlayerInputs();
+        }        
 	}
+
+    public void Kill()
+    {
+        playerDeath.Die();
+    }
+
+    public void DisableControls()
+    {
+        isControlsEnabled = false;
+    }
+
+    public void EnableControls()
+    {
+        isControlsEnabled = true;
+    }
+
+    public void DisableWrapAround() {
+        gameObject.GetComponent<WrapAround>().enabled = false;
+    }
+
+    public void EnableWrapAround() {
+        gameObject.GetComponent<WrapAround>().enabled = true;
+    }
+
+    public void DisableCollisions()
+    {
+        //gameObject.GetComponent<IgnoreCollision>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void EnableCollisions()
+    {
+        //gameObject.GetComponent<IgnoreCollision>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    public void ApplyColor()
+    {
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color(1.0f, 0f, 0f);
+        Debug.Log("ApplyColor");
+    }
+
+    public void RemoveColor()
+    {
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = originalColor;
+        Debug.Log("RemoveColor");
+    }
 
     private void ManagePlayerInputs()
     {
@@ -76,7 +133,7 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
-    void FireMissile()
+    private void FireMissile()
     {
         if (shootingCooldown > shootingDelay)
         {
@@ -92,8 +149,4 @@ public class PlayerCharacter : MonoBehaviour
         
     }
 
-    internal void Kill()
-    {
-        throw new System.NotImplementedException();
-    }
 }
