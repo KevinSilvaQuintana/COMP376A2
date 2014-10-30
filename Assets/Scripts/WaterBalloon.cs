@@ -5,19 +5,14 @@ public class WaterBalloon : MonoBehaviour {
 
     private PlayerCharacter player;
 
-	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
         GameObject collidingObject = col.gameObject;
+        Debug.Log("WaterBalloon OnTriggerEnter2D" + collidingObject);
         if (collidingObject.tag == "Missile")
         {
             // Destroy the missile

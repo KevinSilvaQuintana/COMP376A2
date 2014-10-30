@@ -8,11 +8,15 @@ public class Missile : MonoBehaviour {
 
     public void FireWithOffset(float offsetDistance)
     {
-        Debug.Log("Fire!!!!");
         if (offsetDistance > 0)
         {
-            transform.Translate(transform.forward * offsetDistance);
+            transform.Translate(transform.right * offsetDistance);
         }
         gameObject.rigidbody2D.AddForce(transform.right * force);
+    }
+
+    public void RotateFlightDirection(float deg)
+    {
+        transform.Rotate(Vector3.forward, deg);
     }
 }

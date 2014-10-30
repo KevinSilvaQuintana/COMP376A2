@@ -56,7 +56,6 @@ public class Death : MonoBehaviour
     {
         if (!isReviving)
         {
-            Debug.Log("DIED!!");
             isDying = true;
             lives.RemoveLife();
             player.DisableControls();

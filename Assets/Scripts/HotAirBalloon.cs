@@ -45,7 +45,6 @@ public class HotAirBalloon : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("OnTriggerEnter2D!" + collision.gameObject);
         if (collision.gameObject.tag == "Missile")
         {
             score.AddScoreHotAirBalloon();
