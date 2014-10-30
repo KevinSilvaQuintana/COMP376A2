@@ -10,6 +10,8 @@ public class HotAirBalloon : MonoBehaviour
     private GameObject waterBalloonPrefab;
     [SerializeField]
     private float shootingDelay;
+    [SerializeField]
+    private float balloonOffset;
 
     private PlayerCharacter player;
     private float shootingCooldown;
@@ -41,16 +43,16 @@ public class HotAirBalloon : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("OnTriggerEnter2D!" + collider.gameObject);
-        if (collider.gameObject.tag == "Missile")
+        Debug.Log("OnTriggerEnter2D!" + collision.gameObject);
+        if (collision.gameObject.tag == "Missile")
         {
             score.AddScoreHotAirBalloon();
-            Destroy(collider.gameObject);
+            Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-        else if (collider.gameObject.tag == "Player")
+        else if (collision.gameObject.tag == "Player")
         {
             player.Kill();
             Destroy(gameObject);
@@ -67,8 +69,13 @@ public class HotAirBalloon : MonoBehaviour
     {
         Vector3 playerDirection = player.transform.position - gameObject.transform.position;
 
-        Quaternion q = Quaternion.FromToRotation(Vector3.right, playerDirection);
+        Quaternion q = Quaternion.FromToRotation(Vector3.up, playerDirection);
         GameObject waterBalloon = (GameObject)Instantiate(waterBalloonPrefab, transform.position, q);
-
+        waterBalloon.name = "WaterBallooon";
+        LinearFlight linearFlight = waterBalloon.GetComponent<LinearFlight>();
+        linearFlight.flightDirection = playerDirection;
+        //Must rotate drops because they spawn upside down
+        waterBalloon.transform.Rotate(new Vector3(1, 0, 0), 180f);
+        
     }
 }

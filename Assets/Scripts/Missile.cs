@@ -6,8 +6,9 @@ public class Missile : MonoBehaviour {
     [SerializeField]
     private float force;
 
-    void FireWithOffset(float offsetDistance)
+    public void FireWithOffset(float offsetDistance)
     {
+        Debug.Log("Fire!!!!");
         if (offsetDistance > 0)
         {
             transform.Translate(transform.forward * offsetDistance);

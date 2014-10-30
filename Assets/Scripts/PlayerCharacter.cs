@@ -86,8 +86,7 @@ public class PlayerCharacter : MonoBehaviour
 
             Quaternion q = Quaternion.FromToRotation(Vector3.right, pos - transform.position);
             GameObject newMissile = (GameObject)Instantiate(missilePrefab, transform.position, q);
-
-            newMissile.SendMessage("FireWithOffset", characterOffset);
+            newMissile.GetComponent<Missile>().FireWithOffset(characterOffset);
             shootingCooldown = 0;
         }
         
